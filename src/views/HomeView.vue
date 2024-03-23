@@ -30,8 +30,35 @@
         />
       </svg>
     </div>
-    <loadingComponent />
-    <onboardingComponent />
+    <loadingComponent v-if="loading" />
+    <onboardingComponent v-if="onboarding" />
+    <form action="push" class="submit-form">
+      <div class="form-content">
+        <label for="field1" class="form-label">Select faculty</label>
+        <select name="field1" id="" class="form-select">
+          <option value="value0" class="form-options">select level</option>
+          <option value="value1" class="form-options">value1</option>
+          <option value="value2" class="form-options">value2</option>
+        </select>
+      </div>
+      <div class="form-content">
+        <label for="field1" class="form-label">Select faculty</label>
+        <select name="field1" id="" class="form-select">
+          <option value="value0" class="form-options">select level</option>
+          <option value="value1" class="form-options">value1</option>
+          <option value="value2" class="form-options">value2</option>
+        </select>
+      </div>
+      <div class="form-content">
+        <label for="field1" class="form-label">Select faculty</label>
+        <select name="field1" id="" class="form-select">
+          <option value="value0" class="form-options">select level</option>
+          <option value="value1" class="form-options">value1</option>
+          <option value="value2" class="form-options">value2</option>
+        </select>
+      </div>
+      <input type="submit" class="submit-button" value="View Materials" />
+    </form>
   </div>
 </template>
 
@@ -44,6 +71,29 @@ export default {
   components: {
     loadingComponent,
     onboardingComponent,
+  },
+  data() {
+    return {
+      loading: false,
+      onboarding: true,
+    };
+  },
+  methods: {
+    saveMessage() {
+      localStorage.setItem("message", "onboarded");
+      //Showing onboarding for just 4 seconds then removing it
+      setTimeout(() => {
+        this.onboarding = false;
+      }, 4000);
+    },
+  },
+  mounted() {
+    const storedMessage = localStorage.getItem("message");
+    if (storedMessage) {
+      this.onboarding = false; //Skipping onboarding because it has been shown already
+    } else {
+      this.saveMessage();
+    }
   },
 };
 </script>
@@ -131,6 +181,58 @@ export default {
       grid-column: 2 / span 4;
       justify-self: center;
       align-self: flex-end;
+    }
+  }
+  form.submit-form {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.25rem;
+    gap: 2.37rem;
+    background: #f0f0f0;
+    .form-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      label {
+        color: rgba(0, 0, 0, 0.5);
+        font-family: "IBM Plex Sans";
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 101.754%; /* 1.01756rem */
+        letter-spacing: -0.05rem;
+      }
+      select,
+      option {
+        color: #000;
+        font-family: "IBM Plex Sans";
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 101.754%; /* 1.52631rem */
+        letter-spacing: -0.075rem;
+        border: none;
+        background-color: transparent;
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
+        padding: 1.12rem 0px;
+      }
+    }
+    input.submit-button {
+      color: #000;
+      font-family: "Space Grotesk";
+      font-size: 2.25rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 101.754%; /* 2.2895rem */
+      letter-spacing: -0.1125rem;
+      background-color: transparent;
+      border: none;
+      margin-top: 5rem;
     }
   }
 }

@@ -1,12 +1,27 @@
 <template>
   <div class="text_container">
-    <p class="text"><span>WCF EnR©</span> has been cooking...</p>
+    <p class="text">
+      <span v-if="showSpanText">{{ spanText }}</span> {{ message }}
+    </p>
   </div>
 </template>
 
 <script>
 export default {
   name: "onboardingComponent",
+  data() {
+    return {
+      message: "has been cooking...",
+      spanText: "WCF EnR©",
+      showSpanText: true,
+    };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.message = "Food is almost ready. Have a taste";
+      this.showSpanText = false;
+    }, 2000); // 2000 milliseconds = 2 seconds
+  },
 };
 </script>
 

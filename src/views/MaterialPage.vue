@@ -2,34 +2,7 @@
   <div class="home">
     <loadingComponent v-if="loading" />
     <div class="content">
-      <form action="push" class="submit-form">
-        <div class="form-content">
-          <label for="field1" class="form-label">Select faculty</label>
-          <select name="field1" id="" class="form-select">
-            <option value="value0" class="form-options">select level</option>
-            <option value="value1" class="form-options">value1</option>
-            <option value="value2" class="form-options">value2</option>
-          </select>
-        </div>
-        <div class="form-content">
-          <label for="field1" class="form-label">Select faculty</label>
-          <select name="field1" id="" class="form-select">
-            <option value="value0" class="form-options">select level</option>
-            <option value="value1" class="form-options">value1</option>
-            <option value="value2" class="form-options">value2</option>
-          </select>
-        </div>
-        <div class="form-content">
-          <label for="field1" class="form-label">Select faculty</label>
-          <select name="field1" id="" class="form-select">
-            <option value="value0" class="form-options">select level</option>
-            <option value="value1" class="form-options">value1</option>
-            <option value="value2" class="form-options">value2</option>
-          </select>
-        </div>
-        <input type="submit" class="submit-button" value="View Materials" />
-      </form>
-      <div v-if="materialsGotten" class="loaded-materials">
+      <div class="loaded-materials">
         <div class="material">
           <p class="title">GSP 101 CA</p>
           <p class="size">33kb</p>
@@ -92,57 +65,6 @@ export default {
   .content {
     width: 100%;
     height: 100%;
-    form.submit-form {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding: 1.25rem;
-      gap: 2.37rem;
-      .form-content {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-        label {
-          color: rgba(0, 0, 0, 0.5);
-          font-family: "IBM Plex Sans";
-          font-size: 1rem;
-          font-style: normal;
-          font-weight: 400;
-          line-height: 101.754%; /* 1.01756rem */
-          letter-spacing: -0.05rem;
-        }
-        select,
-        option {
-          color: #000;
-          font-family: "IBM Plex Sans";
-          font-size: 1.5rem;
-          font-style: normal;
-          font-weight: 400;
-          line-height: 101.754%; /* 1.52631rem */
-          letter-spacing: -0.075rem;
-          border: none;
-          background-color: transparent;
-          border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
-          padding: 1.12rem 0px;
-        }
-      }
-      input.submit-button {
-        color: #000;
-        font-family: "Space Grotesk";
-        font-size: 2.25rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 101.754%; /* 2.2895rem */
-        letter-spacing: -0.1125rem;
-        background-color: transparent;
-        border: none;
-        margin-top: 5rem;
-      }
-    }
     .loaded-materials {
       display: flex;
       flex-direction: column;
