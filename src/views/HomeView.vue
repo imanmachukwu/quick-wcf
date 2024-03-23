@@ -34,27 +34,23 @@
     <onboardingComponent v-if="onboarding" />
     <form action="push" class="submit-form">
       <div class="form-content">
-        <label for="field1" class="form-label">Select faculty</label>
-        <select name="field1" id="" class="form-select">
-          <option value="value0" class="form-options">select level</option>
-          <option value="value1" class="form-options">value1</option>
-          <option value="value2" class="form-options">value2</option>
+        <label for="department" class="form-label">Select department</label>
+        <select name="department" id="" class="form-select">
+          <option value="value0" class="form-options">select department</option>
+          <option value="Sociology" class="form-options">Sociology</option>
+          <option value="Computer Science" class="form-options">
+            Computer Science
+          </option>
         </select>
       </div>
       <div class="form-content">
-        <label for="field1" class="form-label">Select faculty</label>
-        <select name="field1" id="" class="form-select">
+        <label for="level" class="form-label">Select level</label>
+        <select name="level" id="" class="form-select">
           <option value="value0" class="form-options">select level</option>
-          <option value="value1" class="form-options">value1</option>
-          <option value="value2" class="form-options">value2</option>
-        </select>
-      </div>
-      <div class="form-content">
-        <label for="field1" class="form-label">Select faculty</label>
-        <select name="field1" id="" class="form-select">
-          <option value="value0" class="form-options">select level</option>
-          <option value="value1" class="form-options">value1</option>
-          <option value="value2" class="form-options">value2</option>
+          <option value="100" class="form-options">100</option>
+          <option value="200" class="form-options">200</option>
+          <option value="300" class="form-options">300</option>
+          <option value="400" class="form-options">400</option>
         </select>
       </div>
       <input type="submit" class="submit-button" value="View Materials" />
