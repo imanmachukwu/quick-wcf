@@ -35,9 +35,13 @@
         }}</label>
         <select name="department" id="" class="form-select">
           <option value="value0" class="form-options">select department</option>
-          <option value="Sociology" class="form-options">Sociology</option>
-          <option value="Computer Science" class="form-options">
-            Computer Science
+          <option
+            v-for="(department, index) in departments"
+            :key="index"
+            :value="department"
+            class="form-options"
+          >
+            {{ department }}
           </option>
         </select>
       </div>
@@ -45,10 +49,14 @@
         <label for="level" class="form-label">{{ level_label }}</label>
         <select name="level" id="" class="form-select">
           <option value="value0" class="form-options">select level</option>
-          <option value="100" class="form-options">100</option>
-          <option value="200" class="form-options">200</option>
-          <option value="300" class="form-options">300</option>
-          <option value="400" class="form-options">400</option>
+          <option
+            v-for="(level, index) in levels"
+            :key="index"
+            :value="level"
+            class="form-options"
+          >
+            {{ level }}
+          </option>
         </select>
       </div>
       <input type="submit" class="submit-button" :value="button_text" />
@@ -101,6 +109,13 @@ export default {
           this.department_label = response.data.department_label[0].text;
           this.level_label = response.data.level_label[0].text;
           this.button_text = response.data.button_text[0].text;
+          this.departments = response.data.departments[0].text
+            .split(",")
+            .map((item) => item.trim())
+            .sort();
+          this.levels = response.data.levels[0].text
+            .split(",")
+            .map((item) => item.trim());
           console.log(response);
           //console.log(works);
         } else {
