@@ -6,13 +6,9 @@
       class="background-image"
     />
     <div class="content">
-      <p class="subtitle">WCF EnR©</p>
-      <p>
-        Unlock your potential! Download academic materials today and pave your
-        path to success. Every page is a stepping stone toward your dreams.
-        Seize the knowledge, empower your future!
-      </p>
-      <h1>Download your materials</h1>
+      <p class="subtitle">{{ copyright_text }}</p>
+      <p>{{ subtext }}</p>
+      <h1>{{ title }}</h1>
       <p class="label">Scroll down</p>
       <svg
         width="42"
@@ -34,7 +30,9 @@
     <onboardingComponent v-if="onboarding" />
     <form action="push" class="submit-form">
       <div class="form-content">
-        <label for="department" class="form-label">Select department</label>
+        <label for="department" class="form-label">{{
+          department_label
+        }}</label>
         <select name="department" id="" class="form-select">
           <option value="value0" class="form-options">select department</option>
           <option value="Sociology" class="form-options">Sociology</option>
@@ -44,7 +42,7 @@
         </select>
       </div>
       <div class="form-content">
-        <label for="level" class="form-label">Select level</label>
+        <label for="level" class="form-label">{{ level_label }}</label>
         <select name="level" id="" class="form-select">
           <option value="value0" class="form-options">select level</option>
           <option value="100" class="form-options">100</option>
@@ -53,7 +51,7 @@
           <option value="400" class="form-options">400</option>
         </select>
       </div>
-      <input type="submit" class="submit-button" value="View Materials" />
+      <input type="submit" class="submit-button" :value="button_text" />
     </form>
   </div>
 </template>
@@ -72,6 +70,14 @@ export default {
     return {
       loading: false,
       onboarding: true,
+      departments: [],
+      levels: [],
+      title: "",
+      subtext: "",
+      copyright_text: "",
+      department_label: "",
+      level_label: "",
+      button_text: "",
     };
   },
   methods: {
@@ -82,6 +88,28 @@ export default {
         this.onboarding = false;
       }, 4000);
     },
+    async getContent() {
+      const api = this.$prismic.client;
+      //console.log(api);
+      // Query the API and assign the response to "response"
+      const response = await api.getSingle("homepage");
+      try {
+        if (response) {
+          this.subtext = response.data.subtext[0].text;
+          this.title = response.data.title[0].text;
+          this.copyright_text = response.data.copyright_text[0].text;
+          this.department_label = response.data.department_label[0].text;
+          this.level_label = response.data.level_label[0].text;
+          this.button_text = response.data.button_text[0].text;
+          console.log(response);
+          //console.log(works);
+        } else {
+          console.log("Error fetching content");
+        }
+      } catch (error) {
+        console.error("Error is:", error);
+      }
+    },
   },
   mounted() {
     const storedMessage = localStorage.getItem("message");
@@ -90,6 +118,9 @@ export default {
     } else {
       this.saveMessage();
     }
+  },
+  created() {
+    this.getContent();
   },
 };
 </script>
