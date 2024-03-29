@@ -67,20 +67,21 @@ export default {
         .split(",")
         .map((item) => item.trim());
       if (this.query_details && this.query_details.length >= 0) {
-        console.log("oh happy day!");
-        console.log(this.query_details);
+        //console.log("oh happy day!");
+        //console.log(this.query_details);
 
         const response = await api.getAllByEveryTag(this.query_details);
-        console.log(response);
+        //console.log(response);
         this.loading = true;
         try {
           if (response) {
             this.loading = false;
             this.materialsGotten = true;
             this.materials = response.sort();
-            console.log(response);
+            //console.log(response);
             //console.log(works);
           } else {
+            this.error = true;
             console.log("Error fetching content");
           }
         } catch (error) {

@@ -134,7 +134,7 @@ export default {
           this.levels = response.data.levels[0].text
             .split(",")
             .map((item) => item.trim());
-          console.log(response);
+          //console.log(response);
           //console.log(works);
         } else {
           console.log("Error fetching content");
