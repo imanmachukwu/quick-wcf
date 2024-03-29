@@ -28,7 +28,7 @@
     </div>
     <loadingComponent v-if="loading" />
     <onboardingComponent v-if="onboarding" />
-    <form action="push" class="submit-form">
+    <form action="push" class="submit-form" id="details-form">
       <div class="form-content">
         <label for="department" class="form-label">{{
           department_label
@@ -39,9 +39,6 @@
           class="form-select"
           v-model="selected_department"
         >
-          <option value="" class="form-options" disabled selected>
-            select department
-          </option>
           <option
             v-for="(department, index) in departments"
             :key="index"
@@ -55,9 +52,6 @@
       <div class="form-content">
         <label for="level" class="form-label">{{ level_label }}</label>
         <select name="level" id="" class="form-select" v-model="selected_level">
-          <option value="" class="form-options" disabled selected>
-            select level
-          </option>
           <option
             v-for="(level, index) in levels"
             :key="index"
@@ -200,7 +194,7 @@ export default {
       font-weight: 400;
       line-height: 101.754%; /* 3.05263rem */
       letter-spacing: -0.558vw;
-      max-width: 27.907vw;
+      max-width: 43.023vw;
       grid-column: 1 / 3;
       grid-row: 1 / 3;
     }

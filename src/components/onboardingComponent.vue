@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       message: "has been cooking...",
-      spanText: "WCF EnR©",
+      spanText: "WCFUNN EnR©",
       showSpanText: true,
     };
   },

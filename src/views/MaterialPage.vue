@@ -3,6 +3,22 @@
     <loadingComponent v-if="loading" />
     <div class="content">
       <div class="loaded-materials">
+        <svg
+          @click="onBackButtonClick"
+          width="42"
+          height="42"
+          viewBox="0 0 42 42"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M33.25 21L10.5 21M21 8.75L8.75 21L21 33.25"
+            stroke="black"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
         <div
           class="material"
           v-for="(material, index) in materials"
@@ -21,7 +37,7 @@
         <p class="text">We couldn’t find any material for you yet.</p>
         <p class="text">Materials are still being added to the platform.</p>
         <p class="text">
-          If you have any, please send it to +23412345678 on WhatsApp
+          If you have any, please send it to Ma Triumph on WhatsApp
           <svg
             width="66"
             height="16"
@@ -92,6 +108,10 @@ export default {
       } else {
         this.$router.push("/");
       }
+    },
+    onBackButtonClick() {
+      this.$router.go(-1);
+      //this.$router.push({ name: "home", hash: "#details-form" });
     },
   },
   created() {
