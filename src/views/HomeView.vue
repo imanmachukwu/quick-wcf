@@ -33,8 +33,15 @@
         <label for="department" class="form-label">{{
           department_label
         }}</label>
-        <select name="department" id="" class="form-select">
-          <option value="value0" class="form-options">select department</option>
+        <select
+          name="department"
+          id=""
+          class="form-select"
+          v-model="selected_department"
+        >
+          <option value="" class="form-options" disabled selected>
+            select department
+          </option>
           <option
             v-for="(department, index) in departments"
             :key="index"
@@ -47,8 +54,10 @@
       </div>
       <div class="form-content">
         <label for="level" class="form-label">{{ level_label }}</label>
-        <select name="level" id="" class="form-select">
-          <option value="value0" class="form-options">select level</option>
+        <select name="level" id="" class="form-select" v-model="selected_level">
+          <option value="" class="form-options" disabled selected>
+            select level
+          </option>
           <option
             v-for="(level, index) in levels"
             :key="index"
@@ -59,7 +68,12 @@
           </option>
         </select>
       </div>
-      <input type="submit" class="submit-button" :value="button_text" />
+      <input
+        type="submit"
+        class="submit-button"
+        :value="button_text"
+        @click="onButtonClick"
+      />
     </form>
   </div>
 </template>
@@ -86,6 +100,8 @@ export default {
       department_label: "",
       level_label: "",
       button_text: "",
+      selected_department: null,
+      selected_level: null,
     };
   },
   methods: {
@@ -101,8 +117,10 @@ export default {
       //console.log(api);
       // Query the API and assign the response to "response"
       const response = await api.getSingle("homepage");
+      this.loading = true;
       try {
         if (response) {
+          this.loading = false;
           this.subtext = response.data.subtext[0].text;
           this.title = response.data.title[0].text;
           this.copyright_text = response.data.copyright_text[0].text;
@@ -124,6 +142,13 @@ export default {
       } catch (error) {
         console.error("Error is:", error);
       }
+    },
+    onButtonClick() {
+      localStorage.setItem("query_details", [
+        this.selected_department,
+        this.selected_level,
+      ]);
+      this.$router.push("/materials");
     },
   },
   mounted() {

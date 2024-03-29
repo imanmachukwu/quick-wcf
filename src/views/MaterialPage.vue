@@ -3,17 +3,17 @@
     <loadingComponent v-if="loading" />
     <div class="content">
       <div class="loaded-materials">
-        <div class="material">
-          <p class="title">GSP 101 CA</p>
-          <p class="size">33kb</p>
-          <p class="length">10 pages</p>
-          <a href="" class="save-button" download>Save</a>
-        </div>
-        <div class="material">
-          <p class="title">GSP 101 CA</p>
-          <p class="size">33kb</p>
-          <p class="length">10 pages</p>
-          <a href="" class="save-button" download>Save</a>
+        <div
+          class="material"
+          v-for="(material, index) in materials"
+          :key="index"
+        >
+          <p class="title">{{ material.data.name[0].text }}</p>
+          <p class="size">{{ material.data.download_size[0].text }}</p>
+          <p class="length">{{ material.data.pages_length[0].text }}</p>
+          <a :href="material.data.material.url" class="save-button" download
+            >Save</a
+          >
         </div>
       </div>
       <div v-if="error" class="error-container">
@@ -51,9 +51,50 @@ export default {
   data() {
     return {
       error: false,
-      loading: false,
+      loading: true,
       materialsGotten: false,
+      materials: [],
+      query_details: [],
     };
+  },
+  methods: {
+    async getContent() {
+      const api = this.$prismic.client;
+      //console.log(api);
+      // Query the API and assign the response to "response"
+      this.query_details = localStorage
+        .getItem("query_details")
+        .split(",")
+        .map((item) => item.trim());
+      if (this.query_details && this.query_details.length >= 0) {
+        console.log("oh happy day!");
+        console.log(this.query_details);
+
+        const response = await api.getAllByEveryTag(this.query_details);
+        console.log(response);
+        this.loading = true;
+        try {
+          if (response) {
+            this.loading = false;
+            this.materialsGotten = true;
+            this.materials = response;
+            console.log(response);
+            //console.log(works);
+          } else {
+            console.log("Error fetching content");
+          }
+        } catch (error) {
+          this.error = true;
+          this.loading = false;
+          console.error("Error is:", error);
+        }
+      } else {
+        this.$router.push("/");
+      }
+    },
+  },
+  created() {
+    this.getContent();
   },
 };
 </script>
