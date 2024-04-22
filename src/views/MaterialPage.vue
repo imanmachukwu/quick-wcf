@@ -1,5 +1,5 @@
-<template>
-  <div class="home">
+<template data-barba="wrapper">
+  <div class="home" data-barba="container" data-barba-namespace="materials">
     <loadingComponent v-if="loading" />
     <div class="content">
       <div class="loaded-materials">
@@ -26,7 +26,7 @@
         >
           <p class="title">{{ material.data.name[0].text }}</p>
           <p class="size">{{ material.data.download_size[0].text }}</p>
-          <p class="length">{{ material.data.pages_length[0].text }}</p>
+          <!-- <p class="length">{{ material.data.pages_length[0].text }}</p> -->
           <a :href="material.data.material.url" class="save-button" download
             >Save</a
           >
@@ -37,20 +37,24 @@
         <p class="text">We couldn’t find any material for you yet.</p>
         <p class="text">Materials are still being added to the platform.</p>
         <p class="text">
-          If you have any, please send it to Ma Triumph on WhatsApp
-          <svg
-            width="66"
-            height="16"
-            viewBox="0 0 66 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M65.7071 8.7071C66.0976 8.31658 66.0976 7.68341 65.7071 7.29289L59.3431 0.928927C58.9526 0.538403 58.3195 0.538403 57.9289 0.928927C57.5384 1.31945 57.5384 1.95262 57.9289 2.34314L63.5858 7.99999L57.9289 13.6568C57.5384 14.0474 57.5384 14.6805 57.9289 15.0711C58.3195 15.4616 58.9526 15.4616 59.3431 15.0711L65.7071 8.7071ZM8.74228e-08 9L65 8.99999L65 6.99999L-8.74228e-08 7L8.74228e-08 9Z"
-              fill="black"
-            />
-          </svg>
+          If you have any, please send it to Ma Lola on WhatsApp.
         </p>
+        <svg
+          @click="onBackButtonClick"
+          width="42"
+          height="42"
+          viewBox="0 0 42 42"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M33.25 21L10.5 21M21 8.75L8.75 21L21 33.25"
+            stroke="black"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </div>
     </div>
   </div>
@@ -90,11 +94,11 @@ export default {
         //console.log(response);
         this.loading = true;
         try {
-          if (response) {
+          if (response.length > 0) {
             this.loading = false;
             this.materialsGotten = true;
             this.materials = response.sort();
-            //console.log(response);
+            console.log(response);
             //console.log(works);
           } else {
             this.error = true;
@@ -114,7 +118,7 @@ export default {
       //this.$router.push({ name: "home", hash: "#details-form" });
     },
   },
-  created() {
+  mounted() {
     this.getContent();
   },
 };

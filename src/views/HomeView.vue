@@ -1,5 +1,5 @@
-<template>
-  <div class="home">
+<template data-barba="wrapper">
+  <div class="home" data-barba="container" data-barba-namespace="home">
     <img
       src="../assets/background_image.png"
       alt="Photo of a bookshelf across a white wall for a minimal aesthetic"
@@ -84,16 +84,16 @@ export default {
   },
   data() {
     return {
-      loading: false,
+      loading: true,
       onboarding: true,
       departments: [],
       levels: [],
-      title: "",
+      title: "Please refresh the page. Or check your internet connection.",
       subtext: "",
       copyright_text: "",
       department_label: "",
       level_label: "",
-      button_text: "",
+      button_text: "Loading...",
       selected_department: null,
       selected_level: null,
     };
@@ -155,6 +155,9 @@ export default {
   },
   created() {
     this.getContent();
+    setTimeout(() => {
+      this.loading = false;
+    }, 10000);
   },
 };
 </script>
