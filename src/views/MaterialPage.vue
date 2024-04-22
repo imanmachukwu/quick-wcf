@@ -98,7 +98,7 @@ export default {
             this.loading = false;
             this.materialsGotten = true;
             this.materials = response.sort();
-            console.log(response);
+            //console.log(response);
             //console.log(works);
           } else {
             this.error = true;
